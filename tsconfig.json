@@ -2,10 +2,17 @@
   "compilerOptions": {
     "module": "CommonJS",
     "strict": true,
-    "sourceMap": true,
-    "outDir": "build",
+    "outDir": "./build",
     "skipLibCheck": true,
-    "target": "es2017"
+    "target": "es2019",
+    "lib": ["es2019"],
+    "moduleResolution": "node",
+    "composite": true,
+    "noErrorTruncation": true,
+    "noImplicitReturns": true,
+    "allowJs": false,
+    "rootDir": "./src",
+    "inlineSourceMap": true
   },
   "include": ["src/**/*"]
 }

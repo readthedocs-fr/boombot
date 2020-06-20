@@ -1,11 +1,11 @@
-import { Command } from "discord-akairo";
-import { Message } from "discord.js";
-import { User } from "discord.js";
+import { Command } from 'discord-akairo';
+import { Message } from 'discord.js';
+import { User } from 'discord.js';
 
 export default class ProjectCommand extends Command {
   constructor() {
-    super("project", {
-      aliases: ["project"],
+    super('project', {
+      aliases: ['project'],
     });
   }
 
@@ -15,29 +15,29 @@ export default class ProjectCommand extends Command {
     }
     const channel = await message.guild.channels.create(message.author.tag, {
       // TODO: Put that in configuration
-      parent: "723970583083352095",
+      parent: '723970583083352095',
       permissionOverwrites: [
         {
           id: message.guild.roles.everyone,
-          type: "role",
-          deny: ["VIEW_CHANNEL", "SEND_MESSAGES"],
+          type: 'role',
+          deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
         },
         {
           id: this.client.user.id,
-          type: "member",
-          allow: ["VIEW_CHANNEL", "SEND_MESSAGES"],
+          type: 'member',
+          allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
         },
         {
           id: message.author,
-          allow: ["VIEW_CHANNEL", "SEND_MESSAGES"],
-          type: "member",
+          allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
+          type: 'member',
         },
       ],
     });
     // TODO: Put message and emojis in configuration
-    const botMessage = await channel.send("Coucou");
-    await botMessage.react("👍");
-    await botMessage.react("👎");
+    const botMessage = await channel.send('Coucou');
+    await botMessage.react('👍');
+    await botMessage.react('👎');
 
     // TODO: If the bot dies, the collector is lost
     const reactions = await botMessage.awaitReactions(
@@ -47,13 +47,13 @@ export default class ProjectCommand extends Command {
           Boolean(
             message.guild?.members.cache
               .get(user.id)
-              ?.roles.cache.get("711876082827264000")
+              ?.roles.cache.get('711876082827264000'),
           )
         );
       },
       {
         max: 1,
-      }
+      },
     );
     console.log(reactions.keys().next());
   }

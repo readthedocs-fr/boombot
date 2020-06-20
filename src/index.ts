@@ -1,6 +1,5 @@
-import "source-map-support";
-import { AkairoClient, CommandHandler } from "discord-akairo";
-import { join as joinPath } from "path";
+import { AkairoClient, CommandHandler } from 'discord-akairo';
+import { join as joinPath } from 'path';
 
 class BoombotClient extends AkairoClient {
   private commandHandler: CommandHandler;
@@ -9,8 +8,11 @@ class BoombotClient extends AkairoClient {
     super({}, {});
 
     this.commandHandler = new CommandHandler(this, {
-      directory: joinPath(__dirname, "./commands"),
-      prefix: "?",
+      directory: joinPath(__dirname, './commands'),
+      prefix: '?',
+      loadFilter(file) {
+        return file.endsWith('.js');
+      },
     });
 
     this.commandHandler.loadAll();
@@ -18,4 +20,4 @@ class BoombotClient extends AkairoClient {
 }
 
 const client = new BoombotClient();
-client.login(process.env.BOOMBOT_TOKEN).then(() => console.log("Started"));
+client.login(process.env.BOOMBOT_TOKEN).then(() => console.log('Started'));
