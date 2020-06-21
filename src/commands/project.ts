@@ -14,8 +14,7 @@ export default class ProjectCommand extends Command {
       return;
     }
     const channel = await message.guild.channels.create(message.author.tag, {
-      // TODO: Put that in configuration
-      parent: '723970583083352095',
+      parent: process.env.DISCORD_PROJECT_PARENT,
       permissionOverwrites: [
         {
           id: message.guild.roles.everyone,
@@ -34,10 +33,11 @@ export default class ProjectCommand extends Command {
         },
       ],
     });
-    // TODO: Put message and emojis in configuration
-    const botMessage = await channel.send('Coucou');
-    await botMessage.react('👍');
-    await botMessage.react('👎');
+
+    const botMessage = await channel.send(process.env.DISCORD_PROJECT_MESSAGES);
+    for (const react of process.env.DISCORD_PROJECT_REACT!.split(',')) {
+      await botMessage.react(react)  
+    }
 
     // TODO: If the bot dies, the collector is lost
     const reactions = await botMessage.awaitReactions(
