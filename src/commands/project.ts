@@ -35,9 +35,8 @@ export default class ProjectCommand extends Command {
     });
 
     const botMessage = await channel.send(process.env.DISCORD_PROJECT_MESSAGES);
-    for (const react of process.env.DISCORD_PROJECT_REACT!.split(',')) {
-      await botMessage.react(react)  
-    }
+await botMessage.react(process.env.BOOMBOT_EMOJI_UPVOTE);
+await botMessage.react(process.env.BOOMBOT_EMOJI_DOWNVOTE);
 
     // TODO: If the bot dies, the collector is lost
     const reactions = await botMessage.awaitReactions(
